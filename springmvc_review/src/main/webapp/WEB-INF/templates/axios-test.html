@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>axios-test</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="测试SpringMVC处理ajax" @click="testAjax()"><br>
+    <input type="button" value="使用@RequestBody注解处理json格式的请求参数" @click="testRequestBody()"><br>
+    <a th:href="@{/axios/responseBody}">测试@ResponseBody注解响应浏览器数据</a><br>
+    <input type="button" value="使用@ResponseBody注解响应json格式的数据" @click="testResponseBody()"><br>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+
+<script type="text/javascript">
+    let vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax(){
+                axios.post(
+                    //只有post请求有请求体，才能用@RequestBody
+                    "/springmvc_review/axios/test?id=100",
+                    {username:"eric",password:"admin123"}
+                ).then(resp=>{
+                    console.log(resp.data)
+                }).catch(reason => {
+                    console.log(reason)
+                })
+            },
+            testRequestBody(){
+                axios.post(
+                    "/springmvc_review/axios/requestBody/testJson",
+                    {username:"admin",id:1,password:"admin123"}
+                ).then(resp=>{
+                    console.log(resp.data)
+                }).catch(reason => {
+                    console.log(reason)
+                })
+            },
+            testResponseBody(){
+                axios.post(
+                    "/springmvc_review/axios/responseBody/testJson",
+                ).then(resp=>{
+                    console.log(resp.data)
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

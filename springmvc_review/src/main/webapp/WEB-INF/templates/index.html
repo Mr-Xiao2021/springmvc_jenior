@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<p>你好~</p>
+<a th:href="@{/test/hello}">thymeleaf</a>
+<a href="/success">thymeleaf</a>
+
+<form th:action="@{/test/hello}" method="post">
+    <input type="submit" value="测试@RequestMapping注解的method属性">
+</form>
+<br>
+<a th:href="@{/test/hello?username=eric}">testParams</a>
+<br>
+<a th:href="@{/test/hello(username='admin',age=20)}">thymeleaf</a>
+
+<hr>
+<form th:action="@{/sign/pojo}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="text" name="password"><br>
+    <input type="submit" value="login"><br>
+</form>
+<br>
+<a th:href="@{/scope/mav1}">测试modelandview</a><br>
+<a th:href="@{/scope/model}">测试model</a><br>
+<a th:href="@{/scope/modelmap}">测试modelmap</a><br>
+<a th:href="@{/scope/map}">测试map</a><br>
+
+<hr>
+<a th:href="@{/scope/session}">测试向会话域共享数据</a><br>
+<a th:href="@{/scope/application}">测试向应用域共享数据</a><br>
+<a th:href="@{/restfulpage}">点击测试restful</a>
+</body>
+</html>
